@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEE (Main) 2026 – Official NTA Login</title>
+    <!-- Font Awesome for refresh icon and better feel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #dce1e8 0%, #f0f3f8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .main-card {
+            max-width: 780px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 20, 40, 0.3);
+            overflow: hidden;
+            border: 1px solid #b3c7e3;
+        }
+
+        /* header with govt logo and three lines */
+        .header {
+            background: #002856;  /* deeper blue */
+            color: white;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 4px solid #ff9933; /* saffron touch */
+        }
+
+        .emblem svg {
+            width: 58px;
+            height: 58px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .emblem-text {
+            line-height: 1.4;
+        }
+
+        .emblem-text .line1 {
+            font-size: 17px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .emblem-text .line2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 4px 0 2px;
+        }
+
+        .emblem-text .line3 {
+            font-size: 15px;
+            font-weight: 400;
+            opacity: 0.95;
+        }
+
+        .exam-title {
+            background: #e2edfc;
+            padding: 16px 24px;
+            border-bottom: 2px solid #1f4b8a;
+        }
+
+        .exam-title h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #003366;
+            margin: 0 0 6px 0;
+        }
+
+        .exam-title .nta-score {
+            font-size: 15px;
+            color: #1e3a5f;
+            font-weight: 600;
+            background: #ffeed9;
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: 30px;
+            border: 1px solid #bb8f4f;
+        }
+
+        .view-result {
+            background-color: #f8fafd;
+            padding: 14px 24px;
+            border-bottom: 1px solid #a7b9d1;
+            font-size: 20px;
+            font-weight: 700;
+            color: #002147;
+            letter-spacing: 0.5px;
+        }
+
+        .login-form {
+            padding: 30px 30px 25px;
+            background: #ffffff;
+        }
+
+        .field-row {
+            margin-bottom: 26px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .field-label {
+            width: 160px;
+            font-weight: 600;
+            font-size: 16px;
+            color: #1e2f4f;
+        }
+
+        .field-input {
+            flex: 1;
+            min-width: 260px;
+        }
+
+        .field-input input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #bac9e0;
+            border-radius: 10px;
+            font-size: 16px;
+            background-color: #ffffff;
+            transition: all 0.15s;
+            box-shadow: inset 0 1px 3px #ddd;
+        }
+
+        .field-input input:focus {
+            border-color: #002856;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 64, 128, 0.2);
+        }
+
+        .required-star {
+            color: #cc0000;
+            font-weight: bold;
+            margin-left: 5px;
+            font-size: 17px;
+        }
+
+        /* captcha area with refresh */
+        .captcha-container {
+            background: #eef5fe;
+            padding: 18px 25px;
+            border-radius: 18px;
+            border: 2px solid #3d6192;
+            margin: 10px 0 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 10px rgba(0,35,70,0.1);
+        }
+
+        .captcha-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .captcha-left span {
+            font-weight: 600;
+            color: #002856;
+        }
+
+        .captcha-box {
+            background: #102a44;
+            color: #ffdb8e;
+            padding: 10px 26px;
+            font-size: 30px;
+            font-family: 'Courier New', monospace;
+            font-weight: 800;
+            letter-spacing: 6px;
+            border-radius: 12px;
+            border: 2px solid #fcb514;
+            box-shadow: inset 0 -2px 0 #8b6f3c;
+            text-transform: uppercase;
+        }
+
+        .refresh-btn {
+            background: #3065a0;
+            color: white;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            border: 1px solid white;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+        }
+
+        .refresh-btn:hover {
+            background: #1d4780;
+            transform: rotate(90deg);
+        }
+
+        .captcha-hint {
+            color: #aa4e1c;
+            font-size: 14px;
+            font-weight: 500;
+            background: #fff2db;
+            padding: 6px 14px;
+            border-radius: 50px;
+            border: 1px dashed #b65900;
+        }
+
+        .btn-login {
+            background: #002856;
+            border: none;
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            padding: 16px 0;
+            width: 100%;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            letter-spacing: 2px;
+            border: 2px solid #ffb347;
+            box-shadow: 0 6px 0 #00142b, 0 8px 14px #00000040;
+            margin: 10px 0 18px 0;
+        }
+
+        .btn-login:hover {
+            background: #103f74;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 #00142b, 0 12px 20px #00000040;
+        }
+
+        .btn-login:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #00142b, 0 8px 14px #00000040;
+        }
+
+        .forgot-link {
+            text-align: right;
+            font-size: 16px;
+        }
+
+        .forgot-link a {
+            color: #b14500;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid #ffb08a;
+        }
+
+        .forgot-link a:hover {
+            color: #802d00;
+            border-bottom: 2px solid #802d00;
+        }
+
+        .footer-note {
+            background: #dde6f5;
+            padding: 15px 25px;
+            font-size: 13px;
+            color: #1f3a5f;
+            border-top: 2px solid #9bb3d5;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .error-message {
+            color: #b11b1b;
+            background: #ffe6e6;
+            padding: 12px 18px;
+            border-radius: 12px;
+            margin: 12px 0 0 10px;
+            font-size: 15px;
+            display: none;
+            border-left: 8px solid #b11b1b;
+            font-weight: 600;
+        }
+
+        /* pdf container */
+        .pdf-container {
+            display: none;
+            background: #1b2f4b;
+            border-top: 6px solid #fcb514;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .pdf-object {
+            width: 100%;
+            background: white;
+            border: 3px solid #002856;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 16px 30px black;
+            text-align: left;
+        }
+
+        .pdf-note {
+            background: #c3e0b0;
+            padding: 12px;
+            font-weight: 600;
+            margin-top: 15px;
+            border-radius: 40px;
+            color: #003d17;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-card" id="mainCard">
+    <!-- header with Ashoka emblem SVG and three lines -->
+    <div class="header">
+        <div class="emblem">
+            <svg viewBox="0 0 100 100" width="58" height="58">
+                <!-- Ashoka Chakra (blue wheel with 24 spokes) -->
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#ffffff" stroke-width="5" />
+                <circle cx="50" cy="50" r="28" fill="none" stroke="#ffffff" stroke-width="4" />
+                <circle cx="50" cy="50" r="12" fill="none" stroke="#ffffff" stroke-width="4" />
+                <!-- 24 spokes -->
+                <g stroke="#ffffff" stroke-width="3">
+                    <line x1="50" y1="10" x2="50" y2="90" />
+                    <line x1="10" y1="50" x2="90" y2="50" />
+                    <line x1="18.8" y1="18.8" x2="81.2" y2="81.2" />
+                    <line x1="81.2" y1="18.8" x2="18.8" y2="81.2" />
+                    <line x1="30" y1="15" x2="70" y2="85" transform="rotate(15 50 50)" />
+                    <line x1="30" y1="85" x2="70" y2="15" transform="rotate(15 50 50)" />
+                    <line x1="30" y1="15" x2="70" y2="85" transform="rotate(30 50 50)" />
+                    <line x1="30" y1="85" x2="70" y2="15" transform="rotate(30 50 50)" />
+                    <line x1="30" y1="15" x2="70" y2="85" transform="rotate(45 50 50)" />
+                    <line x1="30" y1="85" x2="70" y2="15" transform="rotate(45 50 50)" />
+                    <line x1="30" y1="15" x2="70" y2="85" transform="rotate(60 50 50)" />
+                    <line x1="30" y1="85" x2="70" y2="15" transform="rotate(60 50 50)" />
+                    <line x1="30" y1="15" x2="70" y2="85" transform="rotate(75 50 50)" />
+                    <line x1="30" y1="85" x2="70" y2="15" transform="rotate(75 50 50)" />
+                </g>
+                <!-- Ashoka lions simplified (three dots) -->
+                <circle cx="50" cy="28" r="4" fill="#ffffff" />
+                <circle cx="32" cy="42" r="4" fill="#ffffff" />
+                <circle cx="68" cy="42" r="4" fill="#ffffff" />
+            </svg>
+        </div>
+        <div class="emblem-text">
+            <div class="line1">Department of Higher Education</div>
+            <div class="line2">Ministry of Education</div>
+            <div class="line3">Government of India</div>
+        </div>
+    </div>
+
+    <div class="exam-title">
+        <h2>JOINT ENTRANCE EXAMINATION (Main) – 2026 SESSION 1 (JANUARY 2026)</h2>
+        <div class="nta-score">NTA SCORE: Paper 1 (B.E./B Tech.)</div>
+    </div>
+
+    <div class="view-result">
+        🔍 View Result
+    </div>
+
+    <!-- login form (all fields empty initially) -->
+    <div class="login-form" id="loginFormArea">
+        <div class="field-row">
+            <span class="field-label">Application Number <span class="required-star">*</span></span>
+            <div class="field-input">
+                <input type="text" id="appNo" placeholder="Enter your application number" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="field-row">
+            <span class="field-label">Password <span class="required-star">*</span></span>
+            <div class="field-input">
+                <input type="password" id="pwd" placeholder="Enter your password" autocomplete="off">
+            </div>
+        </div>
+
+        <!-- dynamic captcha with refresh -->
+        <div class="captcha-container">
+            <div class="captcha-left">
+                <span>Enter CAPTCHA <span class="required-star">*</span></span>
+                <div class="captcha-box" id="captchaDisplay">JY2K29</div>
+                <button class="refresh-btn" id="refreshCaptcha" title="Refresh CAPTCHA"><i class="fas fa-sync-alt"></i></button>
+            </div>
+            <div class="captcha-hint">
+                <i class="fas fa-info-circle"></i> case sensitive
+            </div>
+        </div>
+
+        <!-- captcha input field -->
+        <div class="field-row" style="margin-top: -10px;">
+            <span class="field-label">Type CAPTCHA <span class="required-star">*</span></span>
+            <div class="field-input">
+                <input type="text" id="captchaInput" placeholder="Enter text as shown" autocomplete="off">
+            </div>
+        </div>
+
+        <button class="btn-login" id="loginBtn">LOGIN</button>
+
+        <div class="forgot-link">
+            <a href="#" id="forgotPwdLink">Forgot Password?</a>
+        </div>
+
+        <!-- error message area -->
+        <div id="loginError" class="error-message"></div>
+    </div>
+
+    <!-- footer disclaimer -->
+    <div class="footer-note">
+        <i class="fas fa-shield-alt"></i> Official NTA service. Please enter correct credentials.
+    </div>
+
+    <!-- PDF CONTAINER (hidden until successful login) -->
+    <div class="pdf-container" id="pdfContainer">
+        <div class="pdf-object">
+            <!-- replica of jee mens.pdf as high-fidelity HTML table -->
+            <div style="background: white; color: black; font-family: 'Times New Roman', Times, serif; padding: 28px 25px; max-width: 100%; margin: 0 auto; font-size: 15px;">
+                <!-- top roll numbers line -->
+                <div style="display: flex; justify-content: space-between; font-weight: bold; border-bottom: 2px solid #222; padding-bottom: 6px; margin-bottom: 18px;">
+                    <span>202311101980</span>
+                    <span>Roll No. (Session 1) BR11009717</span>
+                    <span>Roll No. (Session 2) BR111206632</span>
+                </div>
+
+                <!-- candidate info table -->
+                <table style="width: 100%; border-collapse: collapse; border: 1px solid #222; margin-bottom: 24px;">
+                    <tr><td style="border:1px solid #222; padding:7px; font-weight:bold;">Application No.</td><td style="border:1px solid #222; padding:7px;" colspan="2">240311101980</td><td style="border:1px solid #222; padding:7px; font-weight:bold;">Roll No. (S1)</td><td style="border:1px solid #222; padding:7px;">BR11009717</td><td style="border:1px solid #222; padding:7px; font-weight:bold;">Roll No. (S2)</td><td style="border:1px solid #222; padding:7px;">BR111206632</td></tr>
+                    <tr><td style="border:1px solid #222; padding:7px; font-weight:bold;" colspan="2">Candidate's Name</td><td style="border:1px solid #222; padding:7px;" colspan="5">SHIV SHANKAR KUMAR</td></tr>
+                    <tr><td style="border:1px solid #222; padding:7px; font-weight:bold;" colspan="2">Mother's Name</td><td style="border:1px solid #222; padding:7px;" colspan="5">RAMBATI DEVI</td></tr>
+                    <tr><td style="border:1px solid #222; padding:7px; font-weight:bold;" colspan="2">Father's Name</td><td style="border:1px solid #222; padding:7px;" colspan="5">ASHOK YADAV</td></tr>
+                    <tr><td style="border:1px solid #222; padding:7px; font-weight:bold;">Category</td><td style="border:1px solid #222; padding:7px;">OBC</td><td style="border:1px solid #222; padding:7px; font-weight:bold;" colspan="2">PwD</td><td style="border:1px solid #222; padding:7px;" colspan="3">No</td></tr>
+                    <tr><td style="border:1px solid #222; padding:7px; font-weight:bold;">Gender</td><td style="border:1px solid #222; padding:7px;">Male</td><td style="border:1px solid #222; padding:7px; font-weight:bold;" colspan="2">Date of Birth</td><td style="border:1px solid #222; padding:7px;" colspan="3">28/08/2008</td></tr>
+                    <tr><td style="border:1px solid #222; padding:7px; font-weight:bold;">State of Eligibility</td><td style="border:1px solid #222; padding:7px;">BIHAR</td><td style="border:1px solid #222; padding:7px; font-weight:bold;" colspan="2">Nationality</td><td style="border:1px solid #222; padding:7px;" colspan="3">INDIAN</td></tr>
+                </table>
+
+                <!-- subject marks table -->
+                <table style="width:100%; border-collapse:collapse; border:1px solid black; margin-bottom:20px;">
+                    <thead><tr style="background:#e3e9f2;"><th style="border:1px solid black; padding:6px;">Subject</th><th style="border:1px solid black;">Session 1</th><th style="border:1px solid black;">Session 2</th><th style="border:1px solid black;">Final</th></tr></thead>
+                    <tbody>
+                        <tr><td style="border:1px solid black; padding:6px;">Mathematics</td><td>76.2690232</td><td>93.0848815</td><td>76.2690232</td></tr>
+                        <tr><td style="border:1px solid black;">Physics</td><td>91.0950524</td><td>79.0310001</td><td>91.0950524</td></tr>
+                        <tr><td style="border:1px solid black;">Chemistry</td><td>97.3620512</td><td>90.2244900</td><td>97.3620512</td></tr>
+                        <tr><td style="border:1px solid black; font-weight:bold;">Total</td><td>94.8772566</td><td>88.8112085</td><td>94.8772566</td></tr>
+                    </tbody>
+                </table>
+                <div style="font-weight:bold; margin-bottom:18px;">NTA Score (in words): Ninety Four point Eight Seven Seven Two Five Six Six Only</div>
+
+                <!-- rank table -->
+                <table style="width:100%; border-collapse:collapse; border:1px solid black; margin-bottom:20px;">
+                    <tr><th style="border:1px solid black; padding:7px;" rowspan="2">Course</th><th style="border:1px solid black;" colspan="8">ALL INDIA RANK (AIR) based on FINAL NTA Score</th></tr>
+                    <tr><th style="border:1px solid black;">CRL</th><th>GEN-EWS</th><th>OBC-NCL</th><th>SC</th><th>ST</th><th>CRL-PwD</th><th>GEN-EWS-PwD</th><th>OBC-NCL-PwD</th></tr>
+                    <tr><td style="border:1px solid black;">(B.E./B.Tech.)</td><td>78529</td><td>12866</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+                </table>
+
+                <!-- cut-off table -->
+                <div style="font-weight:bold;">Category-wise Cut-off NTA Score for JEE (Advanced)-2026 (Paper 1)</div>
+                <table style="width:100%; border-collapse:collapse; border:1px solid black; margin:12px 0;">
+                    <tr><th style="border:1px solid black;" colspan="8">Cut-off for Total NTA Score of Paper 1</th><th style="border:1px solid black;">Category</th></tr>
+                    <tr><td style="border:1px solid black;" colspan="8">100.0000000 To 93.2362181 | 93.2312696 To 81.3266412 | 93.2312696 To 79.6757881 | 93.2312696 To 60.0923182 | 93.2312696 To 46.6975840 | 93.2041331 To 0.0018700</td><td style="border:1px solid black;">Common Rank List (CRL) …</td></tr>
+                </table>
+                <div style="font-weight:bold; font-size:18px; margin:16px 0;">Remark: ELIGIBLE</div>
+                <div style="border-top:2px solid #444; margin:15px 0;"></div>
+                <div style="font-size:14px;">✅ candidates eligible for JEE (Advanced)-2026 may register at https://jeoadv.nic.in  |  Seat allocation: https://josaa.nic.in , https://csab.nic.in</div>
+                <div style="font-size:12px; margin-top:20px;"><strong>Note:</strong> 1-8 as per official NTA guidelines. This is computer generated.</div>
+            </div>
+        </div>
+        <div class="pdf-note">📄 Official NTA Scorecard (matches jee mens.pdf)</div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ---------- captcha generation ----------
+        const captchaDisplay = document.getElementById('captchaDisplay');
+        const refreshBtn = document.getElementById('refreshCaptcha');
+        const captchaInput = document.getElementById('captchaInput');
+
+        // fixed valid credentials
+        const validApp = '42000018';
+        const validPwd = 'shiv@9693';
+
+        // generate random 6-char alphanumeric (upper case)
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // avoid confusion 0/O etc
+            let captcha = '';
+            for (let i = 0; i < 6; i++) {
+                captcha += chars[Math.floor(Math.random() * chars.length)];
+            }
+            return captcha;
+        }
+
+        let currentCaptcha = 'JY2K29'; // default, but we'll set random on load
+        function setNewCaptcha() {
+            currentCaptcha = generateCaptcha();
+            captchaDisplay.innerText = currentCaptcha;
+        }
+
+        // initial random captcha (still show some default but refresh anyway)
+        setNewCaptcha();
+
+        refreshBtn.addEventListener('click', function() {
+            setNewCaptcha();
+            captchaInput.value = ''; // clear typed
+        });
+
+        // ---------- login button logic ----------
+        const loginBtn = document.getElementById('loginBtn');
+        const appNoInput = document.getElementById('appNo');
+        const pwdInput = document.getElementById('pwd');
+        const errorDiv = document.getElementById('loginError');
+        const pdfContainer = document.getElementById('pdfContainer');
+        const loginArea = document.getElementById('loginFormArea');
+        const forgotLink = document.getElementById('forgotPwdLink');
+
+        loginBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const enteredApp = appNoInput.value.trim();
+            const enteredPwd = pwdInput.value;
+            const enteredCaptcha = captchaInput.value.trim();
+
+            // reset error
+            errorDiv.style.display = 'none';
+            errorDiv.innerText = '';
+
+            // validations
+            if (enteredApp !== validApp) {
+                showError('Invalid Application Number.');
+                return;
+            }
+            if (enteredPwd !== validPwd) {
+                showError('Incorrect Password.');
+                return;
+            }
+            if (enteredCaptcha.toUpperCase() !== currentCaptcha) {  // case-sensitive check (as it's case sensitive)
+                showError('CAPTCHA does not match (case sensitive).');
+                return;
+            }
+
+            // success
+            pdfContainer.style.display = 'block';
+            pdfContainer.scrollIntoView({ behavior: 'smooth' });
+
+            // disable login button to prevent double login, show success mark
+            loginBtn.disabled = true;
+            loginBtn.style.opacity = '0.6';
+            loginBtn.style.cursor = 'default';
+            loginBtn.innerText = '✓ LOGIN SUCCESS';
+
+            // optional green message
+            const successMsg = document.createElement('div');
+            successMsg.style.background = '#cae6c2';
+            successMsg.style.padding = '12px';
+            successMsg.style.borderRadius = '40px';
+            successMsg.style.marginTop = '16px';
+            successMsg.style.fontWeight = 'bold';
+            successMsg.style.textAlign = 'center';
+            successMsg.innerText = '✅ Login successful! Your scorecard is shown below.';
+            loginArea.appendChild(successMsg);
+        });
+
+        function showError(msg) {
+            errorDiv.style.display = 'block';
+            errorDiv.innerText = '❌ ' + msg;
+        }
+
+        // forgot password click
+        forgotLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('🔐 Demo: Forgot password flow. Use application number 42000018 and password shiv@9693');
+        });
+
+        // extra: pressing enter on any field triggers login (optional)
+        const inputs = [appNoInput, pwdInput, captchaInput];
+        inputs.forEach(inp => inp.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') loginBtn.click();
+        }));
+
+    })();
+</script>
+</body>
+</html>
